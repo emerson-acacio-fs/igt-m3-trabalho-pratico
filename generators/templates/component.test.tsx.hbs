@@ -1,0 +1,10 @@
+import { screen } from "@testing-library/react"
+import { render } from "helpers/test-utils"
+import { {{pascalCase name}} } from "./{{pascalCase name}}"
+
+describe("< {{pascalCase name}} />", () => {
+  it("should exist in the document", () => {
+    render(< {{pascalCase name}} />)
+    expect(screen.getByText(/plop/i)).toBeInTheDocument()
+  })
+})
