@@ -1,3 +1,5 @@
 export function helperFormatNumber(data: number): string {
-  return data.toLocaleString("PT", { maximumFractionDigits: 2 })
+  return (Math.round(data * 100) / 100).toLocaleString("PT", {
+    maximumFractionDigits: 2,
+  })
 }

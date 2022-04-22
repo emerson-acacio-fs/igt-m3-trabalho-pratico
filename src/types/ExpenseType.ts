@@ -4,5 +4,5 @@ export type ExpenseType = {
   category: string
   value: number
   month: string
-  day: number
+  day: string
 }

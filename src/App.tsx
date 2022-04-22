@@ -1,5 +1,5 @@
 import { Home } from "pages/Home"
-import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom"
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 
 import { ThemeProvider } from "styled-components"
 import { GlobalStyles } from "styles/GlobalStyles"

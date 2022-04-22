@@ -1,48 +1,51 @@
+import { Alert } from "@mui/material"
+import { getData } from "api/getData"
 import { ExpenseTable, Header, SelectDate } from "components"
-import { useParams } from "react-router-dom"
+import { helperDateValidation } from "helpers"
+import { useEffect, useState } from "react"
+import { useNavigate, useParams } from "react-router-dom"
+import { ExpenseType } from "types/ExpenseType"
 import * as S from "./styles"
 
 type ParamType = { date: string }
-const CRURRENT_DATE = new Date()
+
 export function Home() {
+  const [expenseList, setExpenseList] = useState<ExpenseType[]>([])
   const params = useParams<ParamType>()
-  const date = params.date?.split("-")
-  let month = CRURRENT_DATE.getMonth()
-  let year = CRURRENT_DATE.getFullYear()
-  if (date && !!date[0] && !!date[1]) {
-    month = Number(date[1]!)
-    year = Number(date[0]!)
-  }
+  const navigate = useNavigate()
+
+  const { month, year, isValidated } = helperDateValidation(params.date)
+  useEffect(() => {
+    async function getDataFromApi() {
+      const newDate = helperDateValidation(params.date)
+      const data = await getData(
+        `${newDate.year}-${String(newDate.month).padStart(2, "0")}`,
+      )
+      setExpenseList([...data])
+    }
+    getDataFromApi()
+  }, [params])
+
+  const totalExpense = expenseList.reduce((acc, item) => acc + item.value, 0)
+
   return (
     <S.Wrapper>
-      <Header totalExpense={125.524632}>
+      <Header totalExpense={totalExpense}>
         <SelectDate
           year={year}
           month={month}
-          handleSelectedMonth={() => false}
-          handleSelectedYear={() => false}
+          handleSelectedMonth={(newMonth) => {
+            navigate(`/${year}-${String(newMonth).padStart(2, "0")}`)
+          }}
+          handleSelectedYear={(newYear) => {
+            navigate(`/${newYear}-${String(month).padStart(2, "0")}`)
+          }}
         />
       </Header>
-      <ExpenseTable
-        expenseList={[
-          {
-            id: 1,
-            description: "sssss",
-            category: "sssss",
-            value: 2222.34662,
-            month: "2020-06",
-            day: 23,
-          },
-          {
-            id: 2,
-            description: "qq",
-            category: "www",
-            value: 2323.34662,
-            month: "2020-06",
-            day: 23,
-          },
-        ]}
-      />
+      {!isValidated && (
+        <Alert severity="error">The requested date is invalid!</Alert>
+      )}
+      <ExpenseTable expenseList={expenseList} />
     </S.Wrapper>
   )
 }

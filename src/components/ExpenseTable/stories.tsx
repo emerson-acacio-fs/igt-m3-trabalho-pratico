@@ -22,7 +22,7 @@ Default.args = {
       category: "sssss",
       value: 2222.34662,
       month: "2020-06",
-      day: 23,
+      day: "23",
     },
     {
       id: 2,
@@ -30,7 +30,7 @@ Default.args = {
       category: "www",
       value: 2323.34662,
       month: "2020-06",
-      day: 23,
+      day: "23",
     },
   ],
 }
