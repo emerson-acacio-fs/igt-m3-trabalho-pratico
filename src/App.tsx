@@ -1,14 +1,35 @@
-import { HelloWorld } from "components"
+import { Home } from "pages/Home"
+import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom"
+
 import { ThemeProvider } from "styled-components"
 import { GlobalStyles } from "styles/GlobalStyles"
+import {
+  createTheme,
+  ThemeProvider as MaterialThemeProvider,
+} from "@mui/material/styles"
 import { theme } from "styles/theme"
+
+const materialTheme = createTheme({
+  typography: {
+    fontSize: 25.6,
+  },
+})
 
 function App(): JSX.Element {
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      <HelloWorld />
-    </ThemeProvider>
+    <MaterialThemeProvider theme={materialTheme}>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        <Router>
+          <Routes>
+            <Route path="*" element={<Home />} />
+            <Route path="expenses" element={<Home />}>
+              <Route path=":date" element={<Home />} />
+            </Route>
+          </Routes>
+        </Router>
+      </ThemeProvider>
+    </MaterialThemeProvider>
   )
 }
 
