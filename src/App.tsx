@@ -23,9 +23,7 @@ function App(): JSX.Element {
         <Router>
           <Routes>
             <Route path="*" element={<Home />} />
-            <Route path="expenses" element={<Home />}>
-              <Route path=":date" element={<Home />} />
-            </Route>
+            <Route path=":date" element={<Home />} />
           </Routes>
         </Router>
       </ThemeProvider>
