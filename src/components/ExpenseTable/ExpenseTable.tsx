@@ -1,10 +1,4 @@
-import {
-  Paper,
-  Table,
-  TableBody,
-  TableContainer,
-  TableRow,
-} from "@mui/material"
+import { Paper, Table, TableContainer, TableRow } from "@mui/material"
 import { helperFormatNumber } from "helpers"
 import { ExpenseType } from "types/ExpenseType"
 import * as S from "./styles"
@@ -14,8 +8,13 @@ export type ExpenseTableProps = {
 }
 
 export const ExpenseTable = ({ expenseList }: ExpenseTableProps) => (
-  <TableContainer component={Paper}>
-    <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+  <TableContainer sx={{ maxHeight: "calc(100vh - 15rem)" }} component={Paper}>
+    <Table
+      stickyHeader
+      sx={{ minWidth: 650 }}
+      size="small"
+      aria-label="a dense table"
+    >
       <S.Head>
         <TableRow>
           <S.Cell>Despesa</S.Cell>
@@ -24,7 +23,7 @@ export const ExpenseTable = ({ expenseList }: ExpenseTableProps) => (
           <S.Cell align="center">Valor (R$)</S.Cell>
         </TableRow>
       </S.Head>
-      <TableBody>
+      <S.Body>
         {expenseList.map((expense) => (
           <TableRow
             key={expense.id}
@@ -38,7 +37,7 @@ export const ExpenseTable = ({ expenseList }: ExpenseTableProps) => (
             <S.Cell align="center">{helperFormatNumber(expense.value)}</S.Cell>
           </TableRow>
         ))}
-      </TableBody>
+      </S.Body>
     </Table>
   </TableContainer>
 )

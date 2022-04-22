@@ -33,6 +33,8 @@ export const theme = {
     gray: "#8F8F8F",
     darkGray: "#2E2F42",
     red: "#FF6347",
+    mask: "rgba(0,0,0,0.2)",
+    blue: "#1E90FF",
   },
   spacings: {
     xxsmall: "0.8rem",
