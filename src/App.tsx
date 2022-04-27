@@ -28,25 +28,8 @@ function RequireAuth({ children }: { children: JSX.Element }) {
   const auth = useAuth()
   const location = useLocation()
 
-  if (auth.isChecking) {
-    return <div />
-  }
-  if (!auth.user.email && !auth.isChecking) {
+  if (!auth.user.email) {
     return <Navigate to="/login" state={{ from: location }} replace />
-  }
-
-  return children
-}
-
-function CheckLogin({ children }: { children: JSX.Element }) {
-  const auth = useAuth()
-  const location = useLocation()
-
-  if (auth.isChecking) {
-    return <div />
-  }
-  if (auth.user.email && !auth.isChecking) {
-    return <Navigate to="/" state={{ from: location }} replace />
   }
 
   return children
@@ -68,14 +51,7 @@ function App(): JSX.Element {
                   </RequireAuth>
                 }
               />
-              <Route
-                path="/login"
-                element={
-                  <CheckLogin>
-                    <Login />
-                  </CheckLogin>
-                }
-              />
+              <Route path="/login" element={<Login />} />
               <Route
                 path=":date"
                 element={

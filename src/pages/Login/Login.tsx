@@ -1,9 +1,22 @@
 import { Alert, Box, Button, TextField } from "@mui/material"
 import { useLogin } from "hooks"
+import { Navigate, useLocation } from "react-router-dom"
 import * as S from "./styles"
 
 export const Login = () => {
-  const { email, setEmail, password, setPassword, error, signIn } = useLogin()
+  const { email, setEmail, password, setPassword, error, signIn, auth } =
+    useLogin()
+
+  const location = useLocation()
+
+  if (auth.isChecking) {
+    return <div />
+  }
+
+  if (auth.user.email && !auth.isChecking) {
+    return <Navigate to="/" state={{ from: location }} replace />
+  }
+
   return (
     <S.Wrapper maxWidth="sm">
       <h1>Desafio do Módulo 3</h1>

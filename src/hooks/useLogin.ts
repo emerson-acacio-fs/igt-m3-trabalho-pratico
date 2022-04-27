@@ -1,3 +1,4 @@
+import { AuthContextType } from "components/AuthProvider"
 import { Dispatch, FormEvent, SetStateAction, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "./useAuth"
@@ -10,19 +11,20 @@ interface UseLoginResponseType {
   error: boolean
   // eslint-disable-next-line no-unused-vars
   signIn: (evt: FormEvent) => void
+  auth: AuthContextType
 }
 export function useLogin(): UseLoginResponseType {
   const [email, setEmail] = useState("usuario@email.com")
   const [password, setPassword] = useState("1234")
   const [error, setError] = useState(false)
 
-  const { signin } = useAuth()
+  const auth = useAuth()
   const navigate = useNavigate()
 
   function signIn(evt: FormEvent) {
     evt.preventDefault()
 
-    signin(
+    auth.signin(
       email,
       password,
       () => setError(true),
@@ -30,5 +32,5 @@ export function useLogin(): UseLoginResponseType {
     )
   }
 
-  return { email, setEmail, password, setPassword, error, signIn }
+  return { email, setEmail, password, setPassword, error, signIn, auth }
 }

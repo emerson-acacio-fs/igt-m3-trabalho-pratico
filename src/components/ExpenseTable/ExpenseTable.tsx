@@ -8,7 +8,7 @@ export type ExpenseTableProps = {
 }
 
 export const ExpenseTable = ({ expenseList }: ExpenseTableProps) => (
-  <TableContainer sx={{ maxHeight: "calc(100vh - 15rem)" }} component={Paper}>
+  <TableContainer sx={{ maxHeight: "calc(100vh - 22rem)" }} component={Paper}>
     <Table
       stickyHeader
       sx={{ minWidth: 650 }}
