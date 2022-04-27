@@ -30,7 +30,7 @@ const MONTHS = [
 
 const CURRENT_YEAR = new Date().getFullYear()
 export const SelectDate = ({
-  beginYear = 2015,
+  beginYear = 2020,
   endYear = CURRENT_YEAR,
   year,
   month,
