@@ -1,12 +1,11 @@
 import styled from "styled-components"
-import { Container } from "@mui/material"
+import { Container, Box } from "@mui/material"
 
 export const Wrapper = styled(Container)`
   &&& {
     display: flex;
     row-gap: 3rem;
     flex-direction: column;
-    margin: 0 auto;
     padding: 3rem;
   }
 `
@@ -30,3 +29,12 @@ export const LoadingWrapper = styled.div`
     }
   }
 `
+
+export const Header = styled(Box)`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
+
+export const UserInfo = styled.span``
+export const UserName = styled.span``
