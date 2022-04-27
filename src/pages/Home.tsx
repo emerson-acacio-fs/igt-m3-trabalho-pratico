@@ -1,25 +1,16 @@
 import { Alert, Button } from "@mui/material"
 import { ExpenseTable, Header, SelectDate } from "components"
-import { helperDateValidation } from "helpers"
 import { useData } from "hooks"
 import { useAuth } from "hooks/useAuth"
-import { useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { PulseLoader } from "react-spinners"
-import { ExpenseType } from "types/ExpenseType"
+
 import * as S from "./styles"
 
-type ParamType = { date: string }
-
 export function Home() {
-  const [expenseList, setExpenseList] = useState<ExpenseType[]>([])
-  const params = useParams<ParamType>()
   const { user, signout } = useAuth()
   const navigate = useNavigate()
-  const { error, loading } = useData(params.date, setExpenseList)
-  const { month, year } = helperDateValidation(params.date)
-
-  const totalExpense = expenseList.reduce((acc, item) => acc + item.value, 0)
+  const { error, loading, totalExpense, expenseList, month, year } = useData()
 
   return (
     <>
@@ -28,7 +19,6 @@ export function Home() {
           <PulseLoader />
         </S.LoadingWrapper>
       )}
-
       <S.Wrapper>
         <S.Header>
           Despesas

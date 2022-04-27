@@ -1,14 +1,16 @@
 import { getData } from "api/getData"
 import { helperDateValidation } from "helpers"
-import { Dispatch, SetStateAction, useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
+import { useParams } from "react-router-dom"
 import { ExpenseType } from "types/ExpenseType"
 
-export function useData(
-  date: string | undefined,
-  setExpenseList: Dispatch<SetStateAction<ExpenseType[]>>,
-) {
+type ParamType = { date: string }
+
+export function useData() {
+  const { date } = useParams<ParamType>()
   const [error, setError] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false)
+  const [expenseList, setExpenseList] = useState<ExpenseType[]>([])
   useEffect(() => {
     async function getDataFromApi() {
       setLoading(true)
@@ -42,6 +44,14 @@ export function useData(
       setTimeout(() => setLoading(false), 500)
     }
     getDataFromApi()
-  }, [date, setExpenseList])
-  return { error, loading }
+  }, [date])
+
+  const { month, year } = useMemo(() => helperDateValidation(date), [date])
+
+  const totalExpense = useMemo(
+    () => expenseList.reduce((acc, item) => acc + item.value, 0),
+    [expenseList],
+  )
+
+  return { error, loading, totalExpense, expenseList, month, year }
 }
