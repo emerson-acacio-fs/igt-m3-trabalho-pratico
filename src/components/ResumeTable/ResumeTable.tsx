@@ -1,13 +1,13 @@
 import { Paper, Table, TableContainer, TableRow } from "@mui/material"
 import { helperFormatNumber } from "helpers"
-import { ExpenseType } from "types/ExpenseType"
+
 import * as S from "./styles"
 
-export type ExpenseTableProps = {
-  expenseList: ExpenseType[]
+export type ResumeTableProps = {
+  resumeList: [string, number][]
 }
 
-export const ExpenseTable = ({ expenseList }: ExpenseTableProps) => (
+export const ResumeTable = ({ resumeList }: ResumeTableProps) => (
   <TableContainer sx={{ maxHeight: "calc(100vh - 35rem)" }} component={Paper}>
     <Table
       stickyHeader
@@ -17,24 +17,21 @@ export const ExpenseTable = ({ expenseList }: ExpenseTableProps) => (
     >
       <S.Head>
         <TableRow>
-          <S.Cell>Despesa</S.Cell>
-          <S.Cell align="center">Categoria</S.Cell>
-          <S.Cell align="center">Dia</S.Cell>
+          <S.Cell>Categoria</S.Cell>
           <S.Cell align="center">Valor (R$)</S.Cell>
         </TableRow>
       </S.Head>
       <S.Body>
-        {expenseList.map((expense) => (
+        {resumeList.map((resume, i) => (
           <TableRow
-            key={expense.id}
+            // eslint-disable-next-line react/no-array-index-key
+            key={`resume_${i}`}
             sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
           >
             <S.Cell component="th" scope="row">
-              {expense.description}
+              {resume[0]}
             </S.Cell>
-            <S.Cell align="center">{expense.category}</S.Cell>
-            <S.Cell align="center">{expense.day}</S.Cell>
-            <S.Cell align="center">{helperFormatNumber(expense.value)}</S.Cell>
+            <S.Cell align="center">{helperFormatNumber(resume[1])}</S.Cell>
           </TableRow>
         ))}
       </S.Body>

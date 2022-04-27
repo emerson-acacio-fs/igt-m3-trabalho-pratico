@@ -6,6 +6,18 @@ import { ExpenseType } from "types/ExpenseType"
 
 type ParamType = { date: string }
 
+const getResume = (expenseList: ExpenseType[]): [string, number][] => {
+  const resume: { [key: string]: number } = {}
+  expenseList.forEach((expense) => {
+    if (!resume[expense.category]) {
+      resume[expense.category] = expense.value
+    } else {
+      resume[expense.category] += expense.value
+    }
+  })
+  return Object.entries(resume).sort((a, b) => b[1] - a[1])
+}
+
 export function useData() {
   const { date } = useParams<ParamType>()
   const [error, setError] = useState<boolean>(false)
@@ -53,5 +65,7 @@ export function useData() {
     [expenseList],
   )
 
-  return { error, loading, totalExpense, expenseList, month, year }
+  const resume = useMemo(() => getResume(expenseList), [expenseList])
+
+  return { error, loading, totalExpense, expenseList, month, year, resume }
 }

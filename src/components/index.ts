@@ -4,6 +4,7 @@ import { HelloWorld } from "./HelloWorld"
 import { ExpenseTable } from "./ExpenseTable"
 import { Header } from "./Header"
 import { SelectDate } from "./SelectDate"
+import { ResumeTable } from "./ResumeTable"
 
 export {
   HelloWorld,
@@ -11,4 +12,5 @@ export {
   ExpenseTable,
   Header,
   SelectDate,
+  ResumeTable,
 }
