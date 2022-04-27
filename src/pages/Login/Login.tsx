@@ -1,6 +1,6 @@
 import { Alert, Box, Button, TextField } from "@mui/material"
 import { useLogin } from "hooks"
-import { Navigate, useLocation } from "react-router-dom"
+import { Navigate } from "react-router-dom"
 import * as S from "./styles"
 
 export const Login = () => {
