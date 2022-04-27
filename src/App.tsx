@@ -1,6 +1,6 @@
 import { Home } from "pages/Home"
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Navigate,
   Route,
   Routes,
