@@ -46,7 +46,7 @@ export function useData() {
           setExpenseList([...newData])
           setError(false)
         } else {
-          navigate("/2021-06")
+          navigate("/expenses/2021-06")
         }
       } catch (err) {
         console.error(err)

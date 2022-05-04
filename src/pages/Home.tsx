@@ -42,10 +42,10 @@ export function Home() {
             year={year}
             month={month}
             handleSelectedMonth={(newMonth) => {
-              navigate(`/${year}-${String(newMonth).padStart(2, "0")}`)
+              navigate(`/expenses/${year}-${String(newMonth).padStart(2, "0")}`)
             }}
             handleSelectedYear={(newYear) => {
-              navigate(`/${newYear}-${String(month).padStart(2, "0")}`)
+              navigate(`/expenses/${newYear}-${String(month).padStart(2, "0")}`)
             }}
           />
         </Header>
