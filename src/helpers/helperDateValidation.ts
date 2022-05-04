@@ -19,16 +19,10 @@ export function helperDateValidation(
         }
       }
     }
-  } else {
-    return {
-      year: CURRENT_DATE.getFullYear(),
-      month: CURRENT_DATE.getMonth(),
-      isValidated: true,
-    }
   }
   return {
-    year: 0,
-    month: 1,
+    year: 2021,
+    month: 6,
     isValidated: false,
   }
 }

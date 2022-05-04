@@ -1,7 +1,7 @@
 import { getData } from "api/getData"
 import { helperDateValidation } from "helpers"
 import { useEffect, useMemo, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { ExpenseType } from "types/ExpenseType"
 
 type ParamType = { date: string }
@@ -22,6 +22,7 @@ export function useData() {
   const { date } = useParams<ParamType>()
   const [error, setError] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false)
+  const navigate = useNavigate()
   const [expenseList, setExpenseList] = useState<ExpenseType[]>([])
   useEffect(() => {
     async function getDataFromApi() {
@@ -45,8 +46,7 @@ export function useData() {
           setExpenseList([...newData])
           setError(false)
         } else {
-          setExpenseList([])
-          setError(true)
+          navigate("/2021-06")
         }
       } catch (err) {
         console.error(err)
@@ -56,7 +56,7 @@ export function useData() {
       setTimeout(() => setLoading(false), 500)
     }
     getDataFromApi()
-  }, [date])
+  }, [date, navigate])
 
   const { month, year } = useMemo(() => helperDateValidation(date), [date])
 

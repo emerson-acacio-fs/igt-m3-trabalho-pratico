@@ -47,14 +47,7 @@ function App(): JSX.Element {
           <GlobalStyles />
           <Router>
             <Routes>
-              <Route
-                path="*"
-                element={
-                  <RequireAuth>
-                    <Home />
-                  </RequireAuth>
-                }
-              />
+              <Route path="*" element={<Navigate to="/2021-06" replace />} />
               <Route path="/login" element={<Login />} />
               <Route
                 path=":date"
